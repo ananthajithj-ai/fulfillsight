@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    container_name: fulfillsight_app
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:17
+    container_name: fulfillsight_postgres
+    env_file:
+      - .env
