@@ -15,28 +15,72 @@ The project is being built incrementally to learn real-world data engineering co
 * Kafka event streaming (upcoming)
 * Data pipelines and analytics (upcoming)
 
-## Architecture
+## Current Architecture
+    Event Generator
+        │
+        ▼
+    PostgreSQL
 
-Python Application Container
+    Upcoming architecture:
 
-↓
-
-PostgreSQL Container
-
-↓
-
-Orders Table
-
-The Python service generates fake order records and inserts them into PostgreSQL using psycopg2.
-
+    Event Generator
+        │
+        ▼
+        Kafka
+        │
+        ▼
+    PySpark Streaming
+        │
+        ▼
+    PostgreSQL
+        │
+        ▼
+        FastAPI
 ## Tech Stack
+     Python 3.13
+    PostgreSQL 17
+    Docker
+    Docker Compose
+    Faker
+    psycopg2
 
-* Python 3.13
-* Docker
-* Docker Compose
-* PostgreSQL 17
-* Faker
-* psycopg2
+    Upcoming:
+
+    Apache Kafka
+    PySpark Structured Streaming
+    FastAPI
+    Database Schema
+    order_events
+
+    Stores raw immutable event history.
+
+    warehouse_metrics
+
+    Stores Spark-generated warehouse analytics.
+
+    anomalies
+
+    Stores operational alerts and anomaly detections.
+
+    inventory_state
+
+    Stores current inventory snapshots.
+
+Event Contract
+
+Every event in FulfillSight follows a standard schema:
+
+{
+  "event_id": "uuid",
+  "event_type": "payment_failed",
+  "order_id": "ORD_123",
+  "warehouse_id": "WH_HYD_01",
+  "sku_id": "SKU_0001",
+  "quantity": 2,
+  "amount": 499.99,
+  "status": "pending",
+  "event_timestamp": "2026-06-07T10:00:00Z"
+}
 
 ## Features Implemented
 
@@ -74,20 +118,28 @@ Inside PostgreSQL:
 
 SELECT COUNT(*) FROM orders;
 
-## Current Status
+## Progress
+### Completed
+Synthetic order generation
+Docker containerization
+Docker Compose orchestration
+Environment variable management
+PostgreSQL integration
+Automatic database initialization
+Database schema design
+Event contract definition
+Repository refactor for future services
+### In Progress
+Kafka integration
+### Planned
+Kafka producers
+Kafka consumers
+PySpark Structured Streaming
+Real-time analytics
+FastAPI dashboard
+Anomaly detection
 
-Completed:
 
-* Dockerized application
-* PostgreSQL integration
-* Order persistence
-
-Planned:
-
-* Kafka producer
-* Kafka consumer
-* Event streaming pipeline
-* Analytics layer
 
 ## Learning Milestones
 

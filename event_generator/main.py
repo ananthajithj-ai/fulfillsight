@@ -1,13 +1,13 @@
 import json
 import logging
 import os
-from src.db import (
+from db.db import (
     get_connection,
     create_orders_table,
     insert_order
 )
-from src.config import APP_NAME,TOTAL_RECORDS,LOG_LEVEL
-from src.generator import generate_order
+from shared.config import APP_NAME,TOTAL_RECORDS,LOG_LEVEL
+from event_generator.generator import generate_order
 
 # Create directories if they don't exist
 os.makedirs("logs", exist_ok=True)
